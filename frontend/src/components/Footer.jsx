@@ -1,6 +1,6 @@
 import React from "react";
 import { FiTwitter, FiFacebook, FiInstagram } from "react-icons/fi";
-// import CommunifyLogo from "./CommunifyLogo"; // Replace this with your Communify logo SVG
+// import CommunifyLogo from "./CommunifyLogo"; // Replace this with your Connectify logo SVG
 import logo from '../assets/communify.png'; // Import the logo image
 
 const Footer = () => {
@@ -14,7 +14,7 @@ const Footer = () => {
           </div>
         </div>
         <p className="text-center text-sm mb-4">
-          © {new Date().getFullYear()} Communify. All rights reserved.
+          © {new Date().getFullYear()} Connectify. All rights reserved.
         </p>
         <div className="flex items-center justify-center mb-4 space-x-4">
           <a href="#" className="text-black hover:text-gray-400">

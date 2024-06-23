@@ -14,6 +14,7 @@ import Admin from './components/Admin';
 import AddBussiness from './components/Addbussiness';
 import Profile from './components/Profile';
 import Detail from './components/Detail';
+import Createresume from './components/Createresume';
 
 function App() {
   const { isLoggedIn } = useAuth();
@@ -32,6 +33,8 @@ function App() {
             <Route path="/postBusinessForm" element={<PostBusinessForm />} />
             <Route path="/addbussiness" element={<AddBussiness/>} />
             <Route  path="/profile" element={<Profile/>} />
+            <Route  path="/createprofile" element={<Createresume/>} />
+
 
           </>
         ) : (

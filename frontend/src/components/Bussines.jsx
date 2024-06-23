@@ -166,7 +166,7 @@ const Business = () => {
               </Card>
             ))
           ) : (
-            <p>No businesses available</p>
+            <p>No Jobs available</p>
           )}
         </div>
       </div>

@@ -143,7 +143,7 @@ function Navbar() {
             <div className="flex-shrink-0">
               <Link to="/" className="flex items-center">
                 <img src={logo} className="duration-1000 ease-in-out h-10 w-auto mr-2" alt="Communify Logo" />
-                <span className="text-xl font-bold text-gray-900">Communify</span>
+                <span className="text-xl font-bold text-gray-900">Connectify</span>
               </Link>
             </div>
             {/* Menu icon for mobile */}
@@ -167,7 +167,7 @@ function Navbar() {
                 to="/bussines"
                 className="text-gray-900 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-gray-300 text-sm font-medium"
               >
-                Business
+                Job
               </Link>
             </div>
           </div>
@@ -192,6 +192,16 @@ function Navbar() {
                   >
                     <Link to="/profile" className="">
                       Profile
+                    </Link>
+                  </Button>
+                  <Button
+                    className="ml-2"
+                    size="sm"
+                    color="primary"
+                    variant="ghost"
+                  >
+                    <Link to="/createprofile" className="">
+                      Create Resume
                     </Link>
                   </Button>
                 </div>
@@ -247,6 +257,12 @@ function Navbar() {
                   className="block w-full text-left text-gray-900 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Logout
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="block w-full text-left text-gray-900 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Create Resume
                 </button>
               </>
             )}

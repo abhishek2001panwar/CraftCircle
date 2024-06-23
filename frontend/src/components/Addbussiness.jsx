@@ -88,7 +88,7 @@ const notify = () => toast("form submitted!");
 
   return (
     <div className="max-w-md mx-auto p-4 font-['bellota'] bg-white shadow-md rounded-md mt-10">
-      <h2 className="text-2xl font-bold mb-6 text-center">Add Business</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center">Add Job Post</h2>
       {message && <p className="text-center text-green-500">{message}</p>}
       {error && <p className="text-center text-red-500">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -97,7 +97,7 @@ const notify = () => toast("form submitted!");
             htmlFor="title"
             className="block text-sm font-medium text-gray-700"
           >
-            Business Name
+            Post Name
           </label>
           <input
             type="text"
@@ -163,10 +163,10 @@ const notify = () => toast("form submitted!");
             htmlFor="openingTime"
             className="block text-sm font-medium text-gray-700"
           >
-            Opening Time
+            Role
           </label>
           <input
-            type="time"
+            type="text"
             id="openingTime"
             name="openingTime"
             value={formData.openingTime}
@@ -180,10 +180,10 @@ const notify = () => toast("form submitted!");
             htmlFor="closingTime"
             className="block text-sm font-medium text-gray-700"
           >
-            Closing Time
+           Experience
           </label>
           <input
-            type="time"
+            type="text"
             id="closingTime"
             name="closingTime"
             value={formData.closingTime}

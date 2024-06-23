@@ -11,7 +11,10 @@ function Profile() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get("/api/v1/user/profile"); // Adjust URL as per your backend setup
+        const res = await axios.get("/api/v1/user/profile", {
+          withCredentials: true,  
+
+        }); // Adjust URL as per your backend setup
         setUser(res.data.user);
       } catch (error) {
         console.error("Error fetching profile:", error);
@@ -52,14 +55,14 @@ function Profile() {
                 className="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3"
                 role="alert"
               >
-                <p className="font-bold">Business Name:</p>
+                <p className="font-bold">Company Name:</p>
                 <p className="text-sm">{user.businessName}</p>
               </div>
             </div>
           )}
           <div className="border-b border-gray-200 mb-6"></div>
           <h2 className="text-xl font-bold mb-2">
-            Your bussiness: {posts.length}
+            Job posted: {posts.length}
           </h2>
           <ul>
             {posts.map((post) => (

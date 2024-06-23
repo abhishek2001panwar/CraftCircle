@@ -26,12 +26,12 @@ function PostBusinessForm() {
   return (
     <section className=" py-16">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-light text-center  mb-8">Post Your Business</h2>
+        <h2 className="text-3xl font-light text-center  mb-8">Post Your job</h2>
         <div className="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-                Business Name
+                JOb Name
               </label>
               <input
                 type="text"
