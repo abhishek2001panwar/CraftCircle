@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useAuth } from "../context/Authcontext";
 import toast, { Toaster } from "react-hot-toast";
+import { FaUser, FaMapMarkerAlt, FaClock } from "react-icons/fa";
 
 function AddBusiness() {
   const { isLoggedIn } = useAuth(); // Assuming isLoggedIn provides user details including id
@@ -16,7 +17,8 @@ function AddBusiness() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [imageUrl, setImageUrl] = useState(""); // State to store image URL
-const notify = () => toast("form submitted!");
+  const notify = () => toast("Form submitted!");
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "image") {
@@ -31,14 +33,6 @@ const notify = () => toast("form submitted!");
       });
     }
   };
-
-  // const handleChange = (e) => {
-  //   const { name, value, files } = e.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: files ? files[0] : value,
-  //   });
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,11 +51,12 @@ const notify = () => toast("form submitted!");
           "Content-Type": "multipart/form-data",
         },
       });
-      if (FormData === null) {
-        return toast.error("Please fill all the fields");
+
+      if (!formData.image) {
+        return toast.error("Please upload an image");
       }
 
-      setMessage("Bussiness successfully Added!");
+      setMessage("Business successfully added!");
       toast.success("Business added successfully");
 
       setImageUrl(response.data.post.image);
@@ -87,28 +82,87 @@ const notify = () => toast("form submitted!");
   };
 
   return (
-    <div className="max-w-md mx-auto p-4 font-['bellota'] bg-white shadow-md rounded-md mt-10">
+    <div className="max-w-md mx-auto p-4 font-bellota bg-white shadow-md rounded-md mt-10">
       <h2 className="text-2xl font-bold mb-6 text-center">Add Job Post</h2>
       {message && <p className="text-center text-green-500">{message}</p>}
       {error && <p className="text-center text-red-500">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
+        <div className="flex items-center space-x-2">
+          <FaUser className="text-gray-600" />
           <label
             htmlFor="title"
             className="block text-sm font-medium text-gray-700"
           >
-            Post Name
+            Company Name
           </label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            required
-          />
         </div>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          value={formData.title}
+          onChange={handleChange}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          required
+        />
+
+        <div className="flex items-center space-x-2">
+          <FaMapMarkerAlt className="text-gray-600" />
+          <label
+            htmlFor="location"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Location
+          </label>
+        </div>
+        <input
+          type="text"
+          id="location"
+          name="location"
+          value={formData.location}
+          onChange={handleChange}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          required
+        />
+
+        <div className="flex items-center space-x-2">
+          <FaClock className="text-gray-600" />
+          <label
+            htmlFor="openingTime"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Role
+          </label>
+        </div>
+        <input
+          type="text"
+          id="openingTime"
+          name="openingTime"
+          value={formData.openingTime}
+          onChange={handleChange}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          required
+        />
+
+        <div className="flex items-center space-x-2">
+          <FaClock className="text-gray-600" />
+          <label
+            htmlFor="closingTime"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Experience
+          </label>
+        </div>
+        <input
+          type="text"
+          id="closingTime"
+          name="closingTime"
+          value={formData.closingTime}
+          onChange={handleChange}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          required
+        />
+
         <div>
           <label
             htmlFor="description"
@@ -125,6 +179,7 @@ const notify = () => toast("form submitted!");
             required
           />
         </div>
+
         <div>
           <label
             htmlFor="image"
@@ -141,70 +196,14 @@ const notify = () => toast("form submitted!");
             required
           />
         </div>
-        <div>
-          <label
-            htmlFor="location"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Location
-          </label>
-          <input
-            type="text"
-            id="location"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            required
-          />
-        </div>
-        <div>
-          <label
-            htmlFor="openingTime"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Role
-          </label>
-          <input
-            type="text"
-            id="openingTime"
-            name="openingTime"
-            value={formData.openingTime}
-            onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            required
-          />
-        </div>
-        <div>
-          <label
-            htmlFor="closingTime"
-            className="block text-sm font-medium text-gray-700"
-          >
-           Experience
-          </label>
-          <input
-            type="text"
-            id="closingTime"
-            name="closingTime"
-            value={formData.closingTime}
-            onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            required
-          />
-        </div>
-        <div>
-          {/* 
-            Removed userId input as it's now automatically populated
-            based on the logged-in user's ID
-          */}
-          <button
-            type="submit"
-            onClick={notify}
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#006fee] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Submit
-          </button>
-        </div>
+
+        <button
+          type="submit"
+          onClick={notify}
+          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#006fee] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

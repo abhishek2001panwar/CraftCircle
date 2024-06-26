@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import { Fragment } from "react";
-import { FaPlus, FaLinkedin, FaGithub } from "react-icons/fa";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
+import { Button } from "@nextui-org/react";
+import axios from 'axios';
 
 const Createresume = () => {
   const [resumeData, setResumeData] = useState({
@@ -10,49 +10,75 @@ const Createresume = () => {
     phone: "",
     linkedin: "",
     github: "",
-    experience: [],
+    description: "",
     skills: "",
-    education: "",
   });
 
-  const [isExperienceModalOpen, setIsExperienceModalOpen] = useState(false);
-  const [experienceData, setExperienceData] = useState({
-    jobTitle: "",
-    company: "",
-    startDate: "",
-    endDate: "",
-    description: "",
-  });
+  const [profilePicture, setProfilePicture] = useState(null);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setResumeData({ ...resumeData, [name]: value });
   };
 
-  const handleExperienceChange = (e) => {
-    const { name, value } = e.target;
-    setExperienceData({ ...experienceData, [name]: value });
+  const handleFileChange = (e) => {
+    setProfilePicture(e.target.files[0]);
   };
 
-  const addExperience = () => {
-    setResumeData({
-      ...resumeData,
-      experience: [...resumeData.experience, experienceData],
-    });
-    setExperienceData({
-      jobTitle: "",
-      company: "",
-      startDate: "",
-      endDate: "",
-      description: "",
-    });
-    setIsExperienceModalOpen(false);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+    setSuccess(null);
+
+    const formData = new FormData();
+    for (const key in resumeData) {
+      formData.append(key, resumeData[key]);
+    }
+    if (profilePicture) {
+      formData.append('image', profilePicture);
+    }
+
+    try {
+      const response = await axios.post('/api/v1/resume/create', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      if (response.status === 200 || response.status === 201) {
+        setResumeData({
+          name: "",
+          email: "",
+          phone: "",
+          linkedin: "",
+          github: "",
+          description: "",
+          skills: "",
+        });
+        setProfilePicture(null);
+        setSuccess("Resume submitted successfully!");
+      } else {
+        setError(`Failed to submit form: ${response.statusText}`);
+      }
+    } catch (error) {
+      if (error.response) {
+        setError(`Failed to submit form: ${error.response.statusText}`);
+      } else if (error.request) {
+        setError("Failed to submit form: No response received");
+      } else {
+        setError(`Failed to submit form: ${error.message}`);
+      }
+    }
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white shadow-xs rounded-lg">
-      <h1 className="text-2xl font-bold mb-6">Create Your Resume</h1>
-      <form className="space-y-4">
+    <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
+      <h1 className="text-3xl font-bold mb-6 text-center">Create Your Resume</h1>
+      {error && <p className="text-red-500 text-center">{error}</p>}
+      {success && <p className="text-green-500 text-center">{success}</p>}
+      <form className="space-y-6" onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">Full Name</label>
@@ -85,7 +111,7 @@ const Createresume = () => {
             />
           </div>
           <div className="flex items-center">
-            <FaLinkedin className="mr-2 text-gray-700" />
+            <FaLinkedin className="mr-2 text-blue-600" />
             <input
               type="text"
               name="linkedin"
@@ -96,7 +122,7 @@ const Createresume = () => {
             />
           </div>
           <div className="flex items-center">
-            <FaGithub className="mr-2 text-gray-700" />
+            <FaGithub className="mr-2 text-gray-800" />
             <input
               type="text"
               name="github"
@@ -108,6 +134,15 @@ const Createresume = () => {
           </div>
         </div>
         <div>
+          <label className="block text-sm font-medium text-gray-700">Description</label>
+          <textarea
+            name="description"
+            value={resumeData.description}
+            onChange={handleInputChange}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          />
+        </div>
+        <div>
           <label className="block text-sm font-medium text-gray-700">Skills</label>
           <textarea
             name="skills"
@@ -117,148 +152,27 @@ const Createresume = () => {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700">Education</label>
-          <textarea
-            name="education"
-            value={resumeData.education}
-            onChange={handleInputChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-          />
-        </div>
-        {/* <div>
-          <h2 className="text-lg font-medium text-gray-700 mb-2">Experience</h2>
-          <button
-            type="button"
-            onClick={() => setIsExperienceModalOpen(true)}
-            className="flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            <FaPlus className="mr-2" /> Add Experience
-          </button>
-          {resumeData.experience.length > 0 && (
-            <ul className="mt-4">
-              {resumeData.experience.map((exp, index) => (
-                <li key={index} className="border-b border-gray-200 py-2">
-                  <h3 className="font-semibold">{exp.jobTitle}</h3>
-                  <p className="text-gray-700">{exp.company}</p>
-                  <p className="text-gray-600">{exp.startDate} - {exp.endDate}</p>
-                  <p className="text-gray-700">{exp.description}</p>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div> */}
-      </form>
-{/* 
-      <Transition appear show={isExperienceModalOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={() => setIsExperienceModalOpen(false)}>
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
-          </Transition.Child>
-
-          <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex items-center justify-center min-h-full p-4 text-center">
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <Dialog.Panel className="w-full max-w-md p-6 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-                  <Dialog.Title
-                    as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
-                  >
-                    Add Experience
-                  </Dialog.Title>
-                  <div className="mt-2">
-                    <form className="space-y-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700">Job Title</label>
-                        <input
-                          type="text"
-                          name="jobTitle"
-                          value={experienceData.jobTitle}
-                          onChange={handleExperienceChange}
-                          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700">Company</label>
-                        <input
-                          type="text"
-                          name="company"
-                          value={experienceData.company}
-                          onChange={handleExperienceChange}
-                          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                        />
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700">Start Date</label>
-                          <input
-                            type="date"
-                            name="startDate"
-                            value={experienceData.startDate}
-                            onChange={handleExperienceChange}
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700">End Date</label>
-                          <input
-                            type="date"
-                            name="endDate"
-                            value={experienceData.endDate}
-                            onChange={handleExperienceChange}
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700">Description</label>
-                        <textarea
-                          name="description"
-                          value={experienceData.description}
-                          onChange={handleExperienceChange}
-                          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                        />
-                      </div>
-                    </form>
-                  </div>
-
-                  <div className="mt-4 flex justify-end">
-                    <button
-                      type="button"
-                      className="px-4 py-2 mr-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                      onClick={() => setIsExperienceModalOpen(false)}
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="button"
-                      className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                      onClick={addExperience}
-                    >
-                      Add Experience
-                    </button>
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
+          <label className="block text-sm font-medium text-gray-700">Profile Picture</label>
+          <div className="mt-1 flex items-center">
+            <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
+              <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 0v24H0V0h24z" fill="none" />
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-6v2h4v-2h3l-5-5-5 5h3z" />
+              </svg>
+            </span>
+            <input
+              type="file"
+              onChange={handleFileChange}
+              className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            />
           </div>
-        </Dialog>
-      </Transition> */}
+        </div>
+        <div className="flex justify-center">
+          <Button size="xs" radius="xs" color="primary" variant="ghost" type="submit">
+            Submit
+          </Button>
+        </div>
+      </form>
     </div>
   );
 };

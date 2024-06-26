@@ -17,19 +17,20 @@ function Hero() {
             Welcome to Connectify
           </h1>
           <p className="mt-4 text-xl">
-            Connecting local businesses with their community. Discover, support,
-            and engage with local businesses around you.
+          Connecting job seekers with employers. Discover, apply, and engage with job opportunities around you.
           </p>
           <p className="mt-4 text-lg">
-            Discover a wide variety of local businesses and services right at
-            your fingertips. From restaurants and cafes to local shops and
-            professional services, Connectify connects you with the heart of your
-            community.
+          Explore a wide variety of job opportunities and services right at your fingertips. From entry-level positions to executive roles, Connectify connects you with the job market and helps you find the perfect fit.
           </p>
           <p className="mt-4 text-lg">
-            Whether you're a resident looking to explore new places or a
-            business owner aiming to reach more customers, Connectify is your
-            go-to platform for fostering local connections.
+          Whether you're a job seeker looking for your next career move or an employer aiming to find the best talent, Connectify is your go-to platform for fostering professional connections and growth.
+
+
+
+
+
+
+
           </p>
           <div className="mt-16 flex justify-center space-x-4">
             {isLoggedIn ? (

@@ -23,6 +23,11 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    resumes: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "Resume",
+    },
+    
   },
   { timestamps: true }
 );

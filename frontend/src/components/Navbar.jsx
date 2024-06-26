@@ -116,7 +116,7 @@ import { Button } from "@nextui-org/react";
 import { useAuth } from '../context/Authcontext';
 import { FiMenu } from 'react-icons/fi'; // Example using Feather Icons for menu icon
 import logo from '../assets/communify.png'; // Import the logo image
-
+import toast, { Toaster } from 'react-hot-toast';
 function Navbar() {
   const { isLoggedIn, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // State for mobile menu
@@ -134,6 +134,13 @@ function Navbar() {
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
+  const handlemessage = () => {
+ if(!isLoggedIn){
+  toast.error('Please login to view this page');
+ }
+
+  
+  }
 
   return (
     <nav className="bg-white border-gray-200">
@@ -159,16 +166,19 @@ function Navbar() {
               {/* Your other navigation links */}
               <Link
                 to="/"
+                onClick={handlemessage}
                 className="text-gray-900 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-gray-300 text-sm font-medium"
               >
                 Home
               </Link>
               <Link
                 to="/bussines"
+                onClick={handlemessage}
                 className="text-gray-900 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-gray-300 text-sm font-medium"
               >
-                Job
+                Career
               </Link>
+              
             </div>
           </div>
           <div className="flex items-center">
