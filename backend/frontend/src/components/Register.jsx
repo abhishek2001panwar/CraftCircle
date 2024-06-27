@@ -181,7 +181,7 @@ function Register() {
           </svg>
         </div>
         <h2 className="text-2xl font-bold text-center text-gray-900">
-          {isRegister ? 'Register for Communify' : 'Login to Communify'}
+          {isRegister ? 'Register for Connectify' : 'Login to Connectify'}
         </h2>
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
           <div className="rounded-md flex flex-col gap-3 shadow-sm -space-y-px">

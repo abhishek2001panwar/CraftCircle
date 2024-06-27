@@ -218,7 +218,7 @@ function Navbar() {
               </>
             ) : (
               <div className="hidden sm:block">
-                <Link to="/register" className="text-white px-3 py-2 rounded-md text-sm font-medium">
+                <Link to="/login" className="text-white px-3 py-2 rounded-md text-sm font-medium">
                   <Button size="sm" color="primary" variant="ghost">
                     Register
                   </Button>
@@ -278,7 +278,7 @@ function Navbar() {
             )}
             {!isLoggedIn && (
               <Link
-                to="/register"
+                to="/login"
                 className="block text-gray-900 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
               >
                 Register

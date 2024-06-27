@@ -57,10 +57,10 @@ function Login() {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
         <div className="flex justify-center">
-          <img src={logo} alt="Communify" className="w-10 h-10" />
+          <img src={logo} alt="Connectify" className="w-10 h-10" />
         </div>
         <h2 className="text-2xl font-bold text-center text-gray-900">
-          {isRegister ? 'Register for Communify' : 'Login to Communify'}
+          {isRegister ? 'Register for Connectify' : 'Login to Connectify'}
         </h2>
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
           <div className="rounded-md flex flex-col gap-3 shadow-sm -space-y-px">

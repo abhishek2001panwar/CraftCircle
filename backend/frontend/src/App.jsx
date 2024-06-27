@@ -4,7 +4,6 @@ import { useAuth } from './context/Authcontext';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Bussines from './components/Bussines';
-import About from './components/About';
 import Contact from './components/Contact';
 import PostBusinessForm from './components/PostBusinessForm';
 import AddBusiness from './components/Addbussiness';
@@ -15,6 +14,7 @@ import AddBussiness from './components/Addbussiness';
 import Profile from './components/Profile';
 import Detail from './components/Detail';
 import Createresume from './components/Createresume';
+import Aboutus from './components/Aboutus';
 
 function App() {
   const { isLoggedIn } = useAuth();
@@ -25,7 +25,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/aboutus" element={<Aboutus />} />
         <Route path="/detail/:id" element={<Detail />} />
         {isLoggedIn ? (
           <>
