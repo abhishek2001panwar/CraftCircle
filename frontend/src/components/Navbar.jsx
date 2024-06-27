@@ -204,7 +204,7 @@ function Navbar() {
                       Profile
                     </Link>
                   </Button>
-                  <Button
+                  {/* <Button
                     className="ml-2"
                     size="sm"
                     color="primary"
@@ -213,7 +213,7 @@ function Navbar() {
                     <Link to="/createprofile" className="">
                       Create Resume
                     </Link>
-                  </Button>
+                  </Button> */}
                 </div>
               </>
             ) : (

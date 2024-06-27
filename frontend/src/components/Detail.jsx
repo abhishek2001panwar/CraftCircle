@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { FaLocationArrow, FaClock, FaArrowLeft, FaBriefcase, FaStar } from 'react-icons/fa';
-
+import {
+  FaLocationArrow,
+  FaClock,
+  FaArrowLeft,
+  FaBriefcase,
+  FaStar,
+} from "react-icons/fa";
+import { Button } from "@nextui-org/react";
 
 function Detail() {
   const { id } = useParams();
@@ -93,6 +99,21 @@ function Detail() {
         </label>
         <p className="text-gray-800 text-lg leading-relaxed">
           {business.description}
+        </p>
+      </div>
+      <div className="mb-6 mt-10 border-t-2 pt-2 border-gray flex justify-center items-end">
+        <label className="block text-md font-light text-gray-700 mb-1">
+          If you appliying for this role then send Your resume
+        </label>
+        <p className="text-gray-800 text-lg leading-relaxed">
+          <a href={`mailto:${business.connectus}`}>
+            <Button
+              className="ml-5"
+              size="sm"
+              color="primary"
+              variant="ghost"
+            >Send</Button>
+          </a>
         </p>
       </div>
     </div>

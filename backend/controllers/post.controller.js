@@ -39,7 +39,7 @@ import cloudinary from "../config/cloudinary.js";
 //   }
 // };
 export const createPost = async (req, res) => {
-  const { title, description, location, openingTime, closingTime } = req.body;
+  const { title, description, location, openingTime, closingTime , connectus} = req.body;
   const image = req.file;
 
   try {
@@ -57,6 +57,8 @@ export const createPost = async (req, res) => {
       location,
       openingTime,
       closingTime,
+      connectus,
+
       creator: req.user._id,
     });
 

@@ -13,6 +13,8 @@ function AddBusiness() {
     location: "",
     openingTime: "",
     closingTime: "",
+    connectus:""
+    
   });
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
@@ -43,6 +45,7 @@ function AddBusiness() {
     data.append("location", formData.location);
     data.append("openingTime", formData.openingTime);
     data.append("closingTime", formData.closingTime);
+    data.append("connectus", formData.connectus)
     data.append("userId", isLoggedIn.id); // Append userId to the form data
 
     try {
@@ -68,6 +71,7 @@ function AddBusiness() {
         location: "",
         openingTime: "",
         closingTime: "",
+        connectus:""
       });
 
     } catch (error) {
@@ -83,8 +87,8 @@ function AddBusiness() {
 
   return (
     <div className="max-w-md mx-auto p-4 font-bellota bg-white shadow-md rounded-md mt-10">
-      <h2 className="text-2xl font-bold mb-6 text-center">Add Job Post</h2>
-      {message && <p className="text-center text-green-500">{message}</p>}
+      <h2 className="text-2xl font-light mb-6 text-center">Add Job Post</h2>
+      {message && <p className="text-center text-green-500"> { formData ? `${message}` : 'Loading..' }   </p>}
       {error && <p className="text-center text-red-500">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex items-center space-x-2">
@@ -174,6 +178,23 @@ function AddBusiness() {
             id="description"
             name="description"
             value={formData.description}
+            onChange={handleChange}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            required
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Connection Email (where users can connect with you)
+          </label>
+          <input 
+            id="connectus"
+            name="connectus"
+            type="email"
+            value={formData.connectus}
             onChange={handleChange}
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             required
