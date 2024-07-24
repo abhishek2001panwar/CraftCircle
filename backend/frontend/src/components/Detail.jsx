@@ -19,6 +19,8 @@ function Detail() {
     openingTime: "",
     closingTime: "",
   });
+  const email = business.connectus || "";
+  const ownerName = email.substring(0, email.indexOf('@')) || "";
 
   useEffect(() => {
     const getOnePost = async () => {
@@ -106,7 +108,10 @@ function Detail() {
           If you appliying for this role then send Your resume
         </label>
         <p className="text-gray-800 text-lg leading-relaxed">
-          <a href={`mailto:${business.connectus}`}>
+   
+
+<a href={`mailto:${email}?subject=Job Application&body=Dear ${ownerName},%0D%0A%0D%0APlease find my resume attached`}>
+
             <Button
               className="ml-5"
               size="sm"
