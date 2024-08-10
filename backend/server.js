@@ -12,6 +12,7 @@ import { router as userRouter } from "./routes/user.routes.js";
 import { router as postsRouter } from "./routes/post.routes.js";
 import { router as contactRouter } from "./routes/contact.routes.js";
 import { router as resumeRouter } from "./routes/resume.routes.js";
+//server.js 
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
