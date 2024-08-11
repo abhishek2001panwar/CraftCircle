@@ -4,6 +4,9 @@ import bcrypt from 'bcryptjs';
 import { User } from '../models/user.model.js';
 // Load User model
 
+
+// Passport configuration
+
 const configurePassport = (passport) => {
     passport.use(
         new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {

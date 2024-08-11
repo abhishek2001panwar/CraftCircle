@@ -1,0 +1,23 @@
+/* Import Tailwind CSS */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Customize the scrollbar */
+::-webkit-scrollbar {
+    width: 7px;
+    height: 4px; /* Adjust the height as desired */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #d8d8d8;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}

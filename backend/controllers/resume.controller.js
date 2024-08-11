@@ -2,9 +2,9 @@ import { Resume } from "../models/resume.model.js";
 import cloudinary from "../config/cloudinary.js";
 import { User } from "../models/user.model.js";
 
+
+//Creating a resume
 export const resumeController = async (req, res) => {
-
-
   const { name, email, phone, linkedin, github, description, skills } =
     req.body;
   const image = req.file;
@@ -25,7 +25,7 @@ export const resumeController = async (req, res) => {
       description,
       skills,
       image: cloudinaryUpload.secure_url,
-        creator: req.user._id,
+      creator: req.user._id,
     });
     await newResume.save();
     user.resumes.push(newResume._id);
@@ -36,14 +36,20 @@ export const resumeController = async (req, res) => {
     res.status(500).json({ msg: "Server error" });
   }
 };
+
+//Getting all resumes
+
 export const getResumes = async (req, res) => {
-    try {
-        const resumes = await Resume.find({ creator: req.user.id }).populate("creator");
-        res.send({
-            resumes: resumes,
-            message: " all resume fetched successfully",
-        });    } catch (err) {
-        console.error(err);
-        res.status(500).json({ msg: "Server error" });
-    }
-    }
+  try {
+    const resumes = await Resume.find({ creator: req.user.id }).populate(
+      "creator"
+    );
+    res.send({
+      resumes: resumes,
+      message: " all resume fetched successfully",
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Server error" });
+  }
+};

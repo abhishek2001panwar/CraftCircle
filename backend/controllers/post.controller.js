@@ -3,41 +3,7 @@ import { User } from "../models/user.model.js";
 import mongoose from "mongoose";
 import cloudinary from "../config/cloudinary.js";
 
-// export const createPost = async (req, res) => {
-//   const { title, description, location, openingTime, closingTime } = req.body;
-//   const image = req.file;
-
-//   try {
-//     // Find the user who created the post
-//     const user = await User.findById(req.user._id);
-
-//     // Create a new post
-//     const newPost = new Post({
-//       title,
-//       description,
-//       image: `/uploads/${image.filename}`,
-//       location,
-//       openingTime,
-//       closingTime,
-//       creator: req.user._id,
-//     });
-
-//     // Save the new post to the database
-//     await newPost.save();
-
-//     // Add the post ID to the user's posts array
-//     user.posts.push(newPost._id);
-
-//     // Save the updated user to the database
-//     await user.save();
-
-//     // Respond with the created post
-//     res.status(201).json({ msg: "Post created", post: newPost });
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ msg: "Server error" });
-//   }
-// };
+// Create a new post/crafts
 export const createPost = async (req, res) => {
   const { title, description, location, openingTime, closingTime , connectus} = req.body;
   const image = req.file;
@@ -79,6 +45,8 @@ export const createPost = async (req, res) => {
   }
 };
 
+// Get all posts/crafts
+
 export const getPosts = async (req, res) => {
 
     try {
@@ -91,6 +59,9 @@ export const getPosts = async (req, res) => {
         console.log("error in fetching posts", error);
     }
 }
+
+// Get a single post/crafts
+
 export const getOnePost = async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);

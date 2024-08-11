@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+
+//post schema/craft schema
 const postSchema = new mongoose.Schema(
   {
     title: {

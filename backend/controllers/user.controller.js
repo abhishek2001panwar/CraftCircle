@@ -2,6 +2,8 @@ import { User } from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import passport from "passport";
 import { Post } from "../models/post.model.js";
+
+// Register a new user
 export const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
   let errors = [];
@@ -42,6 +44,7 @@ export const registerUser = async (req, res) => {
   }
 };
 
+// Login a user
 export const loginUser = async (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) return next(err);
@@ -53,6 +56,8 @@ export const loginUser = async (req, res, next) => {
     });
   })(req, res, next);
 };
+
+// Logout a user
 export const logout = async (req, res) => {
   try {
     req.logout((err) => {
@@ -67,6 +72,7 @@ export const logout = async (req, res) => {
   }
 };
 
+// Get a single user
 export const getOneUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -78,6 +84,8 @@ export const getOneUser = async (req, res) => {
     console.log("error in fetching users", error);
   }
 };
+
+// Get all users
 export const allUsers = async (req, res) => {
   try {
     const users = await User.find().populate("posts");
@@ -90,14 +98,18 @@ export const allUsers = async (req, res) => {
     console.log("error in fetching users", error);
   }
 };
+
+// Update a user
 export const updateUser = () => {
   // Function implementation
 };
 
+// Delete a user
 export const deleteUser = () => {
   // Function implementation
 };
 
+// Get user profile
 export const profileController = async (req, res) => {
   
     try {
@@ -119,6 +131,7 @@ export const profileController = async (req, res) => {
   };
 
 
+// Get authentication status
 export const getAuthStatus = (req, res) => {
   if (req.isAuthenticated()) {
     return res.status(200).json({ isLoggedIn: true });

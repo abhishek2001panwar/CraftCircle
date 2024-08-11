@@ -1,3 +1,6 @@
+
+// Middleware to check if the user is logged in or not
+
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
