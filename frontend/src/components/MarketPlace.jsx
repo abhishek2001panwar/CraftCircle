@@ -3,36 +3,7 @@ import React from "react";
 import { FaSearch, FaFilter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const items = [
-  {
-    id: 1,
-    name: "Handcrafted Vase",
-    description: "Beautiful handcrafted ceramic vase.",
-    price: "$45",
-    image: "https://via.placeholder.com/150",
-  },
-  {
-    id: 2,
-    name: "Artisan Necklace",
-    description: "Elegant necklace made with natural gemstones.",
-    price: "$80",
-    image: "https://via.placeholder.com/150",
-  },
-  {
-    id: 3,
-    name: "Wooden Table",
-    description: "Sturdy wooden table with intricate carvings.",
-    price: "$200",
-    image: "https://via.placeholder.com/150",
-  },
-  {
-    id: 4,
-    name: "Leather Wallet",
-    description: "Genuine leather wallet with multiple compartments.",
-    price: "$60",
-    image: "https://via.placeholder.com/150",
-  },
-];
+import { FaShoppingCart } from "react-icons/fa";
 
 const Marketplace = () => {
   return (
@@ -69,12 +40,11 @@ const Marketplace = () => {
               features and craftsmanship involved. features and craftsmanship
               involved.
             </p>
-            {/* <a
-                href="#"
-                className="inline-block bg-zinc-200 text-black border-[1px] border-black py-1 px-6 rounded-full rounded-bl-sm text-lg font-light hover:bg-gray-800"
-              >
-                View Details
-              </a> */}
+            <div className="flex justify-center gap-32 items-center">
+              <p className="text-lg font-semibold">Price: $45</p>
+              <p className="text-md text-gray-500"></p>
+              <FaShoppingCart />
+            </div>
           </Link>
         </div>
       </div>

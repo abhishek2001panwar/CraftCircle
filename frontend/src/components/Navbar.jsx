@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import logo from "../assets/logo.png";
+import logo1 from "../assets/craftcircle.png"
 
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -37,8 +38,8 @@ function Navbar() {
 
         {/* Logo */}
         <div className="flex items-center space-x-2">
-          <img src={logo} alt="CraftCircle Logo" className="h-8 w-8" />
-          <span className="text-black text-xl font-semibold">CraftCircle</span>
+          {/* <img src={logo} alt="CraftCircle Logo" className="h-8 w-8" /> */}
+          <span className="text-black text-xl font-semibold"><img className=" w-[50%] h-10 md:w-[70%] md:h-16" src={logo1} alt="" /></span>
         </div>
 
         {/* Hamburger Menu Icon for Mobile */}

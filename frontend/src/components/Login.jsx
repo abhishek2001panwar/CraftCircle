@@ -1,13 +1,19 @@
 // AuthComponent.js
 import React, { useState } from 'react';
 
-const Login = () => {
+const AuthComponent = () => {
   const [isLogin, setIsLogin] = useState(true);
 
-  const handleAuth = (event) => {
+  const handleLogin = (event) => {
     event.preventDefault();
-    // Add authentication logic here
-    console.log('Form submitted');
+    // Add login logic here
+    console.log('Login form submitted');
+  };
+
+  const handleRegister = (event) => {
+    event.preventDefault();
+    // Add registration logic here
+    console.log('Registration form submitted');
   };
 
   const handleGoogleSignIn = () => {
@@ -21,28 +27,38 @@ const Login = () => {
         <h2 className="text-3xl font-extrabold mb-6 text-center text-gradient">
           {isLogin ? 'Login' : 'Register'}
         </h2>
-        <form onSubmit={handleAuth}>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-800">Email</label>
-            <input
-              type="email"
-              name="email"
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Email"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-800">Password</label>
-            <input
-              type="password"
-              name="password"
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Password"
-              required
-            />
-          </div>
-          {!isLogin && (
+
+        {isLogin ? (
+          <form onSubmit={handleLogin}>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-800">Email</label>
+              <input
+                type="email"
+                name="email"
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder="Email"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-800">Password</label>
+              <input
+                type="password"
+                name="password"
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full py-2 px-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-md hover:bg-gradient-to-r hover:from-indigo-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+            >
+              Login
+            </button>
+          </form>
+        ) : (
+          <form onSubmit={handleRegister}>
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-800">Full Name</label>
               <input
@@ -53,14 +69,35 @@ const Login = () => {
                 required
               />
             </div>
-          )}
-          <button
-            type="submit"
-            className="w-full py-2 px-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-md hover:bg-gradient-to-r hover:from-indigo-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
-          >
-            {isLogin ? 'Login' : 'Register'}
-          </button>
-        </form>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-800">Email</label>
+              <input
+                type="email"
+                name="email"
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder="Email"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-800">Password</label>
+              <input
+                type="password"
+                name="password"
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full py-2 px-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-md hover:bg-gradient-to-r hover:from-indigo-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+            >
+              Register
+            </button>
+          </form>
+        )}
+
         <div className="my-4 flex items-center justify-between">
           <button
             onClick={handleGoogleSignIn}
@@ -83,4 +120,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AuthComponent;
