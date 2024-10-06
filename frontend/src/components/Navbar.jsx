@@ -39,7 +39,7 @@ function Navbar() {
         {/* Logo */}
         <div className="flex items-center space-x-2">
           {/* <img src={logo} alt="CraftCircle Logo" className="h-8 w-8" /> */}
-          <span className="text-black text-xl font-semibold"><img className=" w-[50%] h-10 md:w-[70%] md:h-16" src={logo1} alt="" /></span>
+          <span className="text-black text-xl font-semibold"><img className=" w-[45%] h-5 md:w-[70%] md:h-16" src={logo1} alt="" /></span>
         </div>
 
         {/* Hamburger Menu Icon for Mobile */}
